@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D1D744E211B522900AE8908 /* Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D744C211B522900AE8908 /* Table.cpp */; };
+		5D1D7451211B524900AE8908 /* TableGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D744F211B524900AE8908 /* TableGenerator.cpp */; };
+		5D1D7454211B526200AE8908 /* Grammar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D7452211B526200AE8908 /* Grammar.cpp */; };
 		5D72E7D7211AED58004D01D8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D72E7D6211AED58004D01D8 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +29,14 @@
 		5D0897A4211AFEAE003E36FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5D0897A5211AFEC4003E36FD /* run.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run.sh; sourceTree = "<group>"; };
 		5D0897A6211AFEFD003E36FD /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		5D1D744C211B522900AE8908 /* Table.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Table.cpp; sourceTree = "<group>"; };
+		5D1D744D211B522900AE8908 /* Table.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Table.hpp; sourceTree = "<group>"; };
+		5D1D744F211B524900AE8908 /* TableGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TableGenerator.cpp; sourceTree = "<group>"; };
+		5D1D7450211B524900AE8908 /* TableGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TableGenerator.hpp; sourceTree = "<group>"; };
+		5D1D7452211B526200AE8908 /* Grammar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Grammar.cpp; sourceTree = "<group>"; };
+		5D1D7453211B526200AE8908 /* Grammar.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Grammar.hpp; sourceTree = "<group>"; };
+		5D1D7456211B52A000AE8908 /* GrammarRule.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GrammarRule.hpp; sourceTree = "<group>"; };
+		5D1D7458211B539E00AE8908 /* TableRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableRow.h; sourceTree = "<group>"; };
 		5D72E7D3211AED58004D01D8 /* LL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LL; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D72E7D6211AED58004D01D8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +75,14 @@
 				5D0897A4211AFEAE003E36FD /* .gitignore */,
 				5D0897A5211AFEC4003E36FD /* run.sh */,
 				5D0897A6211AFEFD003E36FD /* input.txt */,
+				5D1D744C211B522900AE8908 /* Table.cpp */,
+				5D1D744D211B522900AE8908 /* Table.hpp */,
+				5D1D744F211B524900AE8908 /* TableGenerator.cpp */,
+				5D1D7450211B524900AE8908 /* TableGenerator.hpp */,
+				5D1D7452211B526200AE8908 /* Grammar.cpp */,
+				5D1D7453211B526200AE8908 /* Grammar.hpp */,
+				5D1D7456211B52A000AE8908 /* GrammarRule.hpp */,
+				5D1D7458211B539E00AE8908 /* TableRow.h */,
 			);
 			path = LL;
 			sourceTree = "<group>";
@@ -124,7 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D1D744E211B522900AE8908 /* Table.cpp in Sources */,
 				5D72E7D7211AED58004D01D8 /* main.cpp in Sources */,
+				5D1D7451211B524900AE8908 /* TableGenerator.cpp in Sources */,
+				5D1D7454211B526200AE8908 /* Grammar.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,9 +265,11 @@
 		5D72E7DB211AED58004D01D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost_1_67_0/include/;
 				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/boost_1_67_0/lib/;
+				OTHER_LDFLAGS = "-lboost_regex";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -253,9 +277,11 @@
 		5D72E7DC211AED58004D01D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost_1_67_0/include/;
 				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/boost_1_67_0/lib/;
+				OTHER_LDFLAGS = "-lboost_regex";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
