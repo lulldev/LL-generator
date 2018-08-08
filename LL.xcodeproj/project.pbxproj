@@ -23,6 +23,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5D0897A4211AFEAE003E36FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5D0897A5211AFEC4003E36FD /* run.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run.sh; sourceTree = "<group>"; };
+		5D0897A6211AFEFD003E36FD /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		5D72E7D3211AED58004D01D8 /* LL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LL; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D72E7D6211AED58004D01D8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +61,9 @@
 			isa = PBXGroup;
 			children = (
 				5D72E7D6211AED58004D01D8 /* main.cpp */,
+				5D0897A4211AFEAE003E36FD /* .gitignore */,
+				5D0897A5211AFEC4003E36FD /* run.sh */,
+				5D0897A6211AFEFD003E36FD /* input.txt */,
 			);
 			path = LL;
 			sourceTree = "<group>";
