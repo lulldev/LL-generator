@@ -10,14 +10,15 @@ namespace
 {
     const std::string LINE_SPLIT_PATTERN = "->|( +)";
     const std::string GUIDE_SET_SYMBOL = "/";
-} // namespace
+}
 
-CGrammar::CGrammar()
-: m_lineSplitRegex(boost::regex(LINE_SPLIT_PATTERN))
+Grammar::Grammar()
+    : m_lineSplitRegex(boost::regex(LINE_SPLIT_PATTERN)),
+    m_grammar(std::vector<Rule>())
 {
 }
 
-void CGrammar::ReadAndParseGrammar(std::istream& input)
+void Grammar::ReadAndParseGrammar(std::istream& input)
 {
     std::string line;
     std::string leftGrammarPart;
@@ -72,18 +73,18 @@ void CGrammar::ReadAndParseGrammar(std::istream& input)
 }
 
 
-CGrammar::Grammar CGrammar::GetGrammar() const
+std::vector<Rule> Grammar::GetGrammar() const
 {
     return m_grammar;
 }
 
-void CGrammar::ParseLine(const std::string& line, std::vector<std::string>& splitResult) const
+void Grammar::ParseLine(const std::string& line, std::vector<std::string>& splitResult) const
 {
     boost::algorithm::split_regex(splitResult, line, m_lineSplitRegex);
 }
 
 /* return index of first rule with leftGrammarPart or -1 if rule not exist */
-long CGrammar::GetRuleIndex(const std::string& leftGrammarPart) const
+long Grammar::GetRuleIndex(const std::string& leftGrammarPart) const
 {
     auto comparator = [&leftGrammarPart](const Rule& rule) {
         return rule.leftPart == leftGrammarPart;
@@ -92,29 +93,3 @@ long CGrammar::GetRuleIndex(const std::string& leftGrammarPart) const
     
     return (result != m_grammar.end()) ? std::distance(m_grammar.begin(), result) : -1;
 }
-
-
-Rule::RightParts CGrammar::GetDifferentRingtParts(const Rule::RightParts& equals, size_t equalsLength)
-{
-    Rule::RightParts differentRightParts;
-    
-    /*for (auto equal : equals)
-     {
-     if (equal.size() == equalsLength)
-     {
-     differentRightParts.emplace_back(Rule::RightPart(1, ""));
-     }
-     if (equal.size() > equalsLength)
-     {
-     Rule::RightPart tmpRightPart;
-     for (size_t i = equalsLength; i < equal.size(); ++i)
-     {
-     tmpRightPart.emplace_back(equal.at(i));
-     }
-     differentRightParts.push_back(tmpRightPart);
-     }
-     }*/
-    
-    return differentRightParts;
-}
-

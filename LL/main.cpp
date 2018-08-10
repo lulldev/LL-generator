@@ -2,7 +2,7 @@
 //  main.cpp
 //  LL
 //
-//  Created by Ivan Kalagin on 08.08.2018.
+//  Created by Ivan Kalagin on 02.08.2018.
 //  Copyright © 2018 Ivan Kalagin. All rights reserved.
 //
 
@@ -12,13 +12,13 @@
 #include <fstream>
 #include <iomanip>
 
-#include "Grammar.hpp"
-#include "Table.hpp"
-#include "TableGenerator.hpp"
+#include "ll-generator/grammar/Grammar.hpp"
+#include "ll-generator/table/Table.hpp"
+#include "ll-generator/TableGenerator.hpp"
 
 using namespace std;
 
-void PrintTable(const CTable& table);
+void PrintTable(const Table& table);
 
 int main(int argc, char * argv[]) {
     
@@ -35,19 +35,19 @@ int main(int argc, char * argv[]) {
 //        return 1;
 //    }
     
-    CGrammar grammar;
+    Grammar grammar;
     grammar.ReadAndParseGrammar(inputFile);
     
-    CTableGenerator tableGenerator;
+    TableGenerator tableGenerator;
     tableGenerator.Generate(grammar.GetGrammar());
     
-    CTable table = tableGenerator.Get();
+    Table table = tableGenerator.Get();
     PrintTable(table);
     
     return 0;
 }
 
-void PrintTable(const CTable& table)
+void PrintTable(const Table& table)
 {
     cout << setw(4) << left << "id"
     << "| "

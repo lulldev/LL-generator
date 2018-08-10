@@ -4,16 +4,14 @@
 #include <boost/algorithm/string/regex.hpp>
 #include <boost/optional.hpp>
 #include <boost/regex.hpp>
-class CGrammar
+
+class Grammar
 {
 public:
-    using Grammar = std::vector<Rule>;
-    
-    CGrammar();
+    Grammar();
     
     void ReadAndParseGrammar(std::istream& input);
-    void ConvertToLL(); /* mb Grammar GetConvertedGrammar() ? */
-    Grammar GetGrammar() const;
+    std::vector<Rule> GetGrammar() const;
     
 private:
     void ParseLine(const std::string& line, std::vector<std::string>& splitResult) const;
@@ -24,6 +22,6 @@ private:
     Rule::RightParts GetDifferentRingtParts(const Rule::RightParts& equals, size_t equalsLength);
     size_t GetMinSize(const Rule::RightParts& equals) const;
     
-    Grammar m_grammar;
+    std::vector<Rule> m_grammar;
     boost::regex m_lineSplitRegex;
 };

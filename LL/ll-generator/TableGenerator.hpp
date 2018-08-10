@@ -1,20 +1,21 @@
 #pragma once
 #include "TableGenerator.hpp"
-#include "Grammar.hpp"
-#include "Table.hpp"
+#include "grammar/Grammar.hpp"
+#include "table/Table.hpp"
 
 #include <boost/algorithm/string/regex.hpp>
 #include <boost/optional.hpp>
 #include <boost/regex.hpp>
 
-class CTableGenerator
+
+class TableGenerator
 {
 public:
-    void Generate(const CGrammar::Grammar& grammar);
-    CTable Get() const;
+    void Generate(const std::vector<Rule>& grammar);
+    Table Get() const;
     
 private:
-    void Initialize(const CGrammar::Grammar& grammar);
+    void Initialize(const std::vector<Rule>& grammar);
     void Fill();
     
     void AddReferences(const std::string& leftPart, size_t currentRowNumber);
@@ -24,7 +25,7 @@ private:
     void ProcessTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber);
     void ProcessNonTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber);
     
-    CTable m_table;
+    Table m_table;
     
     std::vector<std::pair<std::string, Rule::RightPart::Items>> m_unresolvedNextIds;
     std::map<std::string, std::vector<size_t>> m_tableReferences;

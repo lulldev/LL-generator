@@ -10,21 +10,21 @@ namespace
     const std::string EOF_SYMBOL = "#";
 } // namespace
 
-void CTableGenerator::Generate(const CGrammar::Grammar& grammar)
+void TableGenerator::Generate(const std::vector<Rule>& grammar)
 {
     Initialize(grammar);
     Fill();
 }
 
-CTable CTableGenerator::Get() const
+Table TableGenerator::Get()const
 {
     return m_table;
 }
 
-void CTableGenerator::Initialize(const CGrammar::Grammar& grammar)
+void TableGenerator::Initialize(const std::vector<Rule>& grammar)
 {
     size_t currentRowNumber = 0;
-    for (const auto& rule : grammar)
+    for (auto& rule : grammar)
     {
         const Rule::RightParts& rightParts = rule.rightParts;
         
@@ -48,7 +48,7 @@ void CTableGenerator::Initialize(const CGrammar::Grammar& grammar)
     }
 }
 
-void CTableGenerator::Fill()
+void TableGenerator::Fill()
 {
     size_t nextUnresolvedIndex = 0;
     size_t currentRowNumber = m_table.Size();
@@ -86,7 +86,7 @@ void CTableGenerator::Fill()
     }
 }
 
-bool CTableGenerator::IsTerminal(const std::string& symbol)
+bool TableGenerator::IsTerminal(const std::string& symbol)
 {
     if (symbol.empty())
     {
@@ -96,7 +96,7 @@ bool CTableGenerator::IsTerminal(const std::string& symbol)
     return symbol.front() != '<' && symbol.back() != '>';
 }
 
-void CTableGenerator::ProcessTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber)
+void TableGenerator::ProcessTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber)
 {
     row.referencingSet = Rule::RightPart::Guides({ item });
     
@@ -115,7 +115,7 @@ void CTableGenerator::ProcessTerminal(TableRow& row, const std::string& item, co
     }
 }
 
-void CTableGenerator::ProcessNonTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber)
+void TableGenerator::ProcessNonTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber)
 {
     row.referencingSet = m_guidesSet.at(item);
     
@@ -127,7 +127,7 @@ void CTableGenerator::ProcessNonTerminal(TableRow& row, const std::string& item,
     }
 }
 
-void CTableGenerator::AddReferences(const std::string& leftPart, size_t currentRowNumber)
+void TableGenerator::AddReferences(const std::string& leftPart, size_t currentRowNumber)
 {
     auto reference = m_tableReferences.find(leftPart);
     if (reference == m_tableReferences.end())
@@ -140,7 +140,8 @@ void CTableGenerator::AddReferences(const std::string& leftPart, size_t currentR
     }
 }
 
-void CTableGenerator::AddGuides(const std::string& leftPart, const Rule::RightPart::Items& items, const Rule::RightPart::Guides& guides)
+void TableGenerator::AddGuides(const std::string& leftPart, const Rule::RightPart::Items& items,
+                               const Rule::RightPart::Guides& guides)
 {
     auto guidesPos = m_guidesSet.find(leftPart);
     if (guidesPos == m_guidesSet.end())

@@ -1,7 +1,7 @@
 #pragma once
 #include "TableRow.h"
 
-class CTable
+class Table
 {
 public:
     void Add(const TableRow&);
