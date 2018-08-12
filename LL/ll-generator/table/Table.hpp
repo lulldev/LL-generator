@@ -1,13 +1,14 @@
 #pragma once
+
 #include "TableRow.h"
 
 class Table
 {
 public:
-    void Add(const TableRow&);
-    size_t Size() const;
-    TableRow& Get(size_t index);
-    TableRow Get(size_t index) const;
+    void AddRow(const TableRow&);
+    size_t RowsCount() const;
+    TableRow& GetRowByIndex(size_t index);
+    TableRow GetRowByIndex(size_t index) const;
     
 private:
     std::vector<TableRow> m_rows;

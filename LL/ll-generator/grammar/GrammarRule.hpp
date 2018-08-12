@@ -1,9 +1,10 @@
 #pragma once
+
 #include <iostream>
 #include <unordered_set>
 #include <vector>
 
-struct Rule
+struct GrammarRule
 {
     struct RightPart
     {

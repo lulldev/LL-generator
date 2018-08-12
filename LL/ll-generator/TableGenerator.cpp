@@ -1,32 +1,64 @@
 #include "TableGenerator.hpp"
 
-#include <boost/algorithm/string/regex.hpp>
-#include <boost/optional.hpp>
-#include <boost/regex.hpp>
+using namespace std;
 
-namespace
-{
-    const std::string EMPTY_SYMBOL = "<>";
-    const std::string EOF_SYMBOL = "#";
-} // namespace
+const std::string EMPTY_SYMBOL = "<>";
+const std::string EOF_SYMBOL = "#";
 
-void TableGenerator::Generate(const std::vector<Rule>& grammar)
+
+void TableGenerator::Generate(const std::vector<GrammarRule>& grammar)
 {
     Initialize(grammar);
     Fill();
 }
 
-Table TableGenerator::Get()const
-{
-    return m_table;
+void TableGenerator::PrintTable() {
+    cout << setw(4) << left << "id"
+    << "| "
+    << setw(30) << "Guide set"
+    << "| "
+    << setw(7) << "Next"
+    << "| "
+    << setw(9) << "Is shift"
+    << "| "
+    << setw(11) << "Is id in Stack"
+    << "| "
+    << setw(9) << "Error"
+    << "| "
+    << setw(7) << "End"
+    << "| " << endl;
+    
+    cout << string(90, '-') << endl;
+    
+    for (size_t i = 0; i < m_table.RowsCount(); ++i)
+    {
+        TableRow currentRow = m_table.GetRowByIndex(i);
+        string set = "{ ";
+        size_t counter = 0;
+        for (const auto& reference : currentRow.referencingSet)
+        {
+            set.append(reference).append(" ");
+            ++counter;
+        }
+        set.append("}");
+        
+        cout << setw(4) << left << (" " + to_string(i)) << "| "
+        << setw(30) << set << "| "
+        << setw(7) << (currentRow.next == boost::none ? "-" : to_string(currentRow.next.get())) << "| "
+        << setw(9) << (currentRow.isShift ? "+" : "-") << "| "
+        << setw(11) << (currentRow.idAtStack == boost::none ? "-" : to_string(currentRow.idAtStack.get())) << "| "
+        << setw(9) << (currentRow.isError ? "+" : "-") << "| "
+        << setw(7) << (currentRow.isEnd ? "+" : "-") << "| "
+        << endl;
+    }
 }
 
-void TableGenerator::Initialize(const std::vector<Rule>& grammar)
+void TableGenerator::Initialize(const std::vector<GrammarRule>& grammar)
 {
     size_t currentRowNumber = 0;
     for (auto& rule : grammar)
     {
-        const Rule::RightParts& rightParts = rule.rightParts;
+        const GrammarRule::RightParts& rightParts = rule.rightParts;
         
         for (const auto& part : rightParts)
         {
@@ -42,7 +74,7 @@ void TableGenerator::Initialize(const std::vector<Rule>& grammar)
             AddReferences(rule.leftPart, currentRowNumber);
             AddGuides(rule.leftPart, part.items, part.guides);
             
-            m_table.Add(row);
+            m_table.AddRow(row);
             ++currentRowNumber;
         }
     }
@@ -51,18 +83,18 @@ void TableGenerator::Initialize(const std::vector<Rule>& grammar)
 void TableGenerator::Fill()
 {
     size_t nextUnresolvedIndex = 0;
-    size_t currentRowNumber = m_table.Size();
+    size_t currentRowNumber = m_table.RowsCount();
     
     for (const auto& unresolvedNextId : m_unresolvedNextIds)
     {
-        m_table.Get(nextUnresolvedIndex).next = currentRowNumber;
+        m_table.GetRowByIndex(nextUnresolvedIndex).next = currentRowNumber;
         
         if (unresolvedNextId.second.empty())
         {
             ++currentRowNumber;
             TableRow row;
             row.referencingSet = m_guidesSet.at(EMPTY_SYMBOL + unresolvedNextId.first);
-            m_table.Add(row);
+            m_table.AddRow(row);
         }
         
         for (const auto& item : unresolvedNextId.second)
@@ -79,7 +111,7 @@ void TableGenerator::Fill()
                 ProcessNonTerminal(row, item, unresolvedNextId.second, currentRowNumber);
             }
             
-            m_table.Add(row);
+            m_table.AddRow(row);
         }
         
         ++nextUnresolvedIndex;
@@ -96,9 +128,9 @@ bool TableGenerator::IsTerminal(const std::string& symbol)
     return symbol.front() != '<' && symbol.back() != '>';
 }
 
-void TableGenerator::ProcessTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber)
+void TableGenerator::ProcessTerminal(TableRow& row, const std::string& item, const GrammarRule::RightPart::Items& items, size_t currentRowNumber)
 {
-    row.referencingSet = Rule::RightPart::Guides({ item });
+    row.referencingSet = GrammarRule::RightPart::Guides({ item });
     
     if (&item != &items.back())
     {
@@ -115,7 +147,7 @@ void TableGenerator::ProcessTerminal(TableRow& row, const std::string& item, con
     }
 }
 
-void TableGenerator::ProcessNonTerminal(TableRow& row, const std::string& item, const Rule::RightPart::Items& items, size_t currentRowNumber)
+void TableGenerator::ProcessNonTerminal(TableRow& row, const std::string& item, const GrammarRule::RightPart::Items& items, size_t currentRowNumber)
 {
     row.referencingSet = m_guidesSet.at(item);
     
@@ -140,8 +172,8 @@ void TableGenerator::AddReferences(const std::string& leftPart, size_t currentRo
     }
 }
 
-void TableGenerator::AddGuides(const std::string& leftPart, const Rule::RightPart::Items& items,
-                               const Rule::RightPart::Guides& guides)
+void TableGenerator::AddGuides(const std::string& leftPart, const GrammarRule::RightPart::Items& items,
+                               const GrammarRule::RightPart::Guides& guides)
 {
     auto guidesPos = m_guidesSet.find(leftPart);
     if (guidesPos == m_guidesSet.end())

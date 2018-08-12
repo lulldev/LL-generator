@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 #include <boost/algorithm/string/regex.hpp>
 #include <boost/optional.hpp>
 #include <boost/regex.hpp>
@@ -8,13 +9,13 @@
 struct TableRow
 {
     explicit TableRow()
-    : next(boost::none)
-    , idAtStack(boost::none)
-    , isError(true)
-    , isEnd(false)
-    , isShift(false)
-    {
-    }
+        : next(boost::none)
+        , idAtStack(boost::none)
+        , isError(true)
+        , isEnd(false)
+        , isShift(false)
+        {
+        }
     std::unordered_set<std::string> referencingSet;
     
     boost::optional<size_t> next;
