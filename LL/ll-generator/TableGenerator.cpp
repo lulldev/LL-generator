@@ -46,7 +46,7 @@ void TableGenerator::PrintTable() {
         << setw(30) << set << "| "
         << setw(7) << (currentRow.next == boost::none ? "-" : to_string(currentRow.next.get())) << "| "
         << setw(9) << (currentRow.isShift ? "+" : "-") << "| "
-        << setw(11) << (currentRow.idAtStack == boost::none ? "-" : to_string(currentRow.idAtStack.get())) << "| "
+        << setw(14) << (currentRow.idAtStack == boost::none ? "-" : to_string(currentRow.idAtStack.get())) << "| "
         << setw(9) << (currentRow.isError ? "+" : "-") << "| "
         << setw(7) << (currentRow.isEnd ? "+" : "-") << "| "
         << endl;
