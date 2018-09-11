@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D1812662147B8730046EEFE /* GrammarSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1812642147B8730046EEFE /* GrammarSlider.cpp */; };
 		5D1D744E211B522900AE8908 /* Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D744C211B522900AE8908 /* Table.cpp */; };
 		5D1D7451211B524900AE8908 /* TableGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D744F211B524900AE8908 /* TableGenerator.cpp */; };
 		5D1D7454211B526200AE8908 /* GrammarParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D7452211B526200AE8908 /* GrammarParser.cpp */; };
@@ -29,6 +30,8 @@
 		5D0897A4211AFEAE003E36FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5D0897A5211AFEC4003E36FD /* run.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run.sh; sourceTree = "<group>"; };
 		5D0897A6211AFEFD003E36FD /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		5D1812642147B8730046EEFE /* GrammarSlider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GrammarSlider.cpp; sourceTree = "<group>"; };
+		5D1812652147B8730046EEFE /* GrammarSlider.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GrammarSlider.hpp; sourceTree = "<group>"; };
 		5D1D744C211B522900AE8908 /* Table.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Table.cpp; sourceTree = "<group>"; };
 		5D1D744D211B522900AE8908 /* Table.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Table.hpp; sourceTree = "<group>"; };
 		5D1D744F211B524900AE8908 /* TableGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TableGenerator.cpp; sourceTree = "<group>"; };
@@ -52,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D1812632147B80B0046EEFE /* slider */ = {
+			isa = PBXGroup;
+			children = (
+				5D1812642147B8730046EEFE /* GrammarSlider.cpp */,
+				5D1812652147B8730046EEFE /* GrammarSlider.hpp */,
+			);
+			path = slider;
+			sourceTree = "<group>";
+		};
 		5D72E7CA211AED57004D01D8 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +95,7 @@
 		5DCEE0F6211DF664000EEC6A /* ll-generator */ = {
 			isa = PBXGroup;
 			children = (
+				5D1812632147B80B0046EEFE /* slider */,
 				5DCEE0F8211DFF2D000EEC6A /* grammar */,
 				5DCEE0F7211DF8EE000EEC6A /* table */,
 				5D1D744F211B524900AE8908 /* TableGenerator.cpp */,
@@ -168,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D1D744E211B522900AE8908 /* Table.cpp in Sources */,
+				5D1812662147B8730046EEFE /* GrammarSlider.cpp in Sources */,
 				5D72E7D7211AED58004D01D8 /* main.cpp in Sources */,
 				5D1D7451211B524900AE8908 /* TableGenerator.cpp in Sources */,
 				5D1D7454211B526200AE8908 /* GrammarParser.cpp in Sources */,

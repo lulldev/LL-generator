@@ -80,6 +80,10 @@ void TableGenerator::Initialize(const std::vector<GrammarRule>& grammar)
     }
 }
 
+Table TableGenerator::GetTable() {
+    return m_table;
+}
+
 void TableGenerator::Fill()
 {
     size_t nextUnresolvedIndex = 0;

@@ -16,6 +16,7 @@ class TableGenerator
 public:
     void Generate(const std::vector<GrammarRule>& grammar);
     void PrintTable();
+    Table GetTable();
     
 private:
     Table m_table;
