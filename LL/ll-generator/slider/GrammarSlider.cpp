@@ -4,103 +4,60 @@ using namespace std;
 
 void GrammarSlider::RunSlider(const std::string &str, Table &table)
 {
-    stringstream strm(str);
-    
-    string elem;
-    size_t index = 0;
+    std::istringstream strm(str);
+    std::stack<size_t> stack;
+    std::string lex;
     bool isError = false;
-    bool isEnd = false;
-    stack<size_t> stack;
+    size_t index = 0u;
     
-    while (strm >> elem)
+    strm >> lex;
+    
+    while (true)
     {
-        cout << "search for " << elem << endl;
+        TableRow& state = table.GetRowByIndex(index);
         
-        TableRow& row = table.GetRowByIndex(index);
-        
-        do
+        if (state.referencingSet.find(lex) == state.referencingSet.end())
         {
-            row = table.GetRowByIndex(index);
-            
-            cout << index << " ";
-            
-            if (row.isEnd)
+            if (!state.isError)
             {
-                if (elem == "#")
-                {
-                    isEnd = true;
-                    break;
-                }
-                else
-                {
-                    if (!stack.empty())
-                    {
-                        index = stack.top();
-                        stack.pop();
-                        continue;
-                    }
-                    else
-                    {
-                        isError = true;
-                        break;
-                    }
-                }
-            }
-            
-            if (row.referencingSet.find(elem) != row.referencingSet.end())
-            {
-                if (row.idAtStack != boost::none)
-                {
-                    stack.push(row.idAtStack.get());
-                }
-                
-                if (row.next != boost::none)
-                {
-                    index = row.next.get();
-                }
-                else
-                {
-                    if (!stack.empty())
-                    {
-                        index = stack.top();
-                        stack.pop();
-                    }
-                    else
-                    {
-                        isError = true;
-                        break;
-                    }
-                }
+                ++index;
+                continue;
             }
             else
             {
-                if (!row.isError)
-                {
-                    ++index;
-                }
-                else
-                {
-                    isError = true;
-                    break;
-                }
+                isError = true;
+                break;
             }
-        } while (!row.isShift);
+        }
         
-        cout << endl;
-        
-        if (isEnd || isError)
+        if (state.isEnd)
         {
+            assert(stack.empty());
+            isError = false;
             break;
+        }
+        
+        if (state.idAtStack != boost::none)
+        {
+            stack.push(index + 1);
+        }
+        
+        if (state.isShift)
+        {
+            strm >> lex;
+        }
+        
+        if (state.next != boost::none)
+        {
+            index = *state.next;
+        }
+        else
+        {
+            assert(!stack.empty());
+            index = stack.top();
+            stack.pop();
         }
     }
     
-    if (isError)
-    {
-        cout << "Error" << endl;
-    }
-    
-    if (isEnd)
-    {
-        cout << "End" << endl;
-    }
+    cout << std::boolalpha << !isError << endl;
 }
