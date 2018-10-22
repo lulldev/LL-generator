@@ -12,6 +12,7 @@
 		5D1D7451211B524900AE8908 /* TableGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D744F211B524900AE8908 /* TableGenerator.cpp */; };
 		5D1D7454211B526200AE8908 /* GrammarParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1D7452211B526200AE8908 /* GrammarParser.cpp */; };
 		5D72E7D7211AED58004D01D8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D72E7D6211AED58004D01D8 /* main.cpp */; };
+		5D8226B4217DB75A00238114 /* Lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D8226B2217DB75A00238114 /* Lexer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,8 @@
 		5D1D7458211B539E00AE8908 /* TableRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableRow.h; sourceTree = "<group>"; };
 		5D72E7D3211AED58004D01D8 /* LL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LL; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D72E7D6211AED58004D01D8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5D8226B2217DB75A00238114 /* Lexer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Lexer.cpp; sourceTree = "<group>"; };
+		5D8226B3217DB75A00238114 /* Lexer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Lexer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 		5D72E7D5211AED58004D01D8 /* LL */ = {
 			isa = PBXGroup;
 			children = (
+				5D8226B1217DB72900238114 /* lexer */,
 				5DCEE0F6211DF664000EEC6A /* ll-generator */,
 				5D72E7D6211AED58004D01D8 /* main.cpp */,
 				5D0897A4211AFEAE003E36FD /* .gitignore */,
@@ -90,6 +94,15 @@
 				5D0897A6211AFEFD003E36FD /* input.txt */,
 			);
 			path = LL;
+			sourceTree = "<group>";
+		};
+		5D8226B1217DB72900238114 /* lexer */ = {
+			isa = PBXGroup;
+			children = (
+				5D8226B2217DB75A00238114 /* Lexer.cpp */,
+				5D8226B3217DB75A00238114 /* Lexer.hpp */,
+			);
+			path = lexer;
 			sourceTree = "<group>";
 		};
 		5DCEE0F6211DF664000EEC6A /* ll-generator */ = {
@@ -180,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D8226B4217DB75A00238114 /* Lexer.cpp in Sources */,
 				5D1D744E211B522900AE8908 /* Table.cpp in Sources */,
 				5D1812662147B8730046EEFE /* GrammarSlider.cpp in Sources */,
 				5D72E7D7211AED58004D01D8 /* main.cpp in Sources */,

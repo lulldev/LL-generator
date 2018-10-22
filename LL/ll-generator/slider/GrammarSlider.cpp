@@ -11,6 +11,7 @@ void GrammarSlider::RunSlider(const std::string &str, Table &table)
     size_t index = 0u;
     
     strm >> lex;
+    std::cout << lex << std::endl;
     
     while (true)
     {
